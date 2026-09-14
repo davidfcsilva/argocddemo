@@ -225,214 +225,223 @@ data:
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ArgoCD Demo — Holiday Decor</title>
+        <title>ArgoCD Demo — Halloween Haunt</title>
         <style>
           * { margin: 0; padding: 0; box-sizing: border-box; }
-
-          @keyframes snowFall {
-            0% { transform: translateY(-20px) translateX(0px); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(105vh) translateX(20px); opacity: 0; }
+    
+          @keyframes leafFall {
+            0%   { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
+            10%  { opacity: 0.85; }
+            100% { transform: translateY(108vh) translateX(70px) rotate(560deg); opacity: 0.15; }
           }
-          @keyframes treeSway {
-            0%, 100% { transform: translateX(-3px); }
-            50% { transform: translateX(3px); }
+          @keyframes batFly {
+            0%   { transform: translate(0, 0); }
+            25%  { transform: translate(24px, -14px); }
+            50%  { transform: translate(48px, 2px); }
+            75%  { transform: translate(24px, 12px); }
+            100% { transform: translate(0, 0); }
           }
-          @keyframes ornamentGlow {
-            0%, 100% { opacity: 0.6; filter: brightness(1); }
-            50% { opacity: 1; filter: brightness(1.4); }
+          @keyframes ghostFloat {
+            0%, 100% { transform: translate(0, 0); opacity: 0.8; }
+            50%      { transform: translate(5px, -16px); opacity: 0.96; }
           }
-          @keyframes starPulse {
-            0%, 100% { filter: drop-shadow(0 0 6px #ffd700) drop-shadow(0 0 12px rgba(255,215,0,0.4)); opacity: 0.85; transform: scale(1); }
-            50% { filter: drop-shadow(0 0 14px #ffd700) drop-shadow(0 0 28px rgba(255,215,0,0.6)); opacity: 1; transform: scale(1.08); }
+          @keyframes pumpkinPulse {
+            0%, 100% { filter: drop-shadow(0 0 6px rgba(255,157,0,0.55)) drop-shadow(0 0 18px rgba(255,120,0,0.25)); }
+            50%      { filter: drop-shadow(0 0 16px rgba(255,157,0,0.95)) drop-shadow(0 0 42px rgba(255,120,0,0.55)); }
           }
-
+          @keyframes spiderSway {
+            0%, 100% { transform: rotate(-9deg); }
+            50%      { transform: rotate(9deg); }
+          }
+          @keyframes moonGlow {
+            0%, 100% { opacity: 0.7; }
+            50%      { opacity: 1; }
+          }
+    
           body {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: linear-gradient(175deg, #0a1f16 0%, #132e20 35%, #1a4030 65%, #0d2818 100%);
+            background:
+              radial-gradient(1200px 620px at 50% 10%, rgba(88,44,120,0.38), rgba(0,0,0,0) 60%),
+              linear-gradient(175deg, #170b26 0%, #1d0f2e 35%, #241021 65%, #0d0616 100%);
             font-family: 'Courier New', monospace;
             overflow: hidden;
             position: relative;
           }
-
-          .snowflake {
+    
+          .leaf {
             position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: snowFall linear infinite;
+            border-radius: 0 60% 0 60%;
+            top: -20px;
+            animation: leafFall linear infinite;
+            opacity: 0.7;
           }
-
-          .tree-wrap {
-            animation: treeSway 4s ease-in-out infinite;
-            z-index: 1;
-          }
-
-          .ornament {
-            animation: ornamentGlow 2.5s ease-in-out infinite;
-          }
-          .ornament.o1 { animation-delay: 0s; }
-          .ornament.o2 { animation-delay: 0.4s; }
-          .ornament.o3 { animation-delay: 0.8s; }
-          .ornament.o4 { animation-delay: 1.2s; }
-          .ornament.o5 { animation-delay: 1.6s; }
-
-          .star-topper {
-            transform-box: fill-box;
-            transform-origin: center;
-            animation: starPulse 2s ease-in-out infinite;
-          }
-
-          .garland-dot {
-            animation: ornamentGlow 3s ease-in-out infinite alternate;
-          }
-
+    
+          .bat { animation: batFly 9s ease-in-out infinite; }
+          .bat.b1 { animation-duration: 8s; }
+          .bat.b2 { animation-duration: 11s; animation-delay: -3s; }
+          .bat.b3 { animation-duration: 7s; animation-delay: -5s; }
+    
+          .ghost { animation: ghostFloat 4.5s ease-in-out infinite; }
+    
+          .pumpkin-face { animation: pumpkinPulse 2.4s ease-in-out infinite; }
+    
+          .spider { animation: spiderSway 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: top center; }
+    
+          .moon-halo { animation: moonGlow 5s ease-in-out infinite; }
+    
           .title {
-            color: #fff8e7;
+            color: #ffd8a8;
             font-size: 2.6rem;
             margin-top: 8px;
             letter-spacing: 4px;
-            text-shadow: 0 0 24px rgba(255,215,0,0.3), 0 0 60px rgba(255,215,0,0.15);
+            text-shadow: 0 0 24px rgba(255,140,0,0.45), 0 0 60px rgba(255,90,0,0.2);
             z-index: 1;
           }
-
+    
           .console {
             margin-top: 28px;
             padding: 20px 32px;
-            background: rgba(5,15,8,0.85);
-            border: 1px solid rgba(102,217,168,0.3);
+            background: rgba(12,6,20,0.85);
+            border: 1px solid rgba(255,140,0,0.35);
             border-radius: 12px;
-            color: #66d9a8;
+            color: #f2a65a;
             font-size: 0.92rem;
             line-height: 1.7;
             z-index: 1;
-            box-shadow: 0 0 40px rgba(102,217,168,0.08), inset 0 0 20px rgba(102,217,168,0.03);
+            box-shadow: 0 0 40px rgba(255,120,0,0.10), inset 0 0 20px rgba(255,120,0,0.04);
             max-width: 540px;
           }
-          .console .label { color: #ffd700; }
-          .console .ok    { color: #66d9a8; font-weight: bold; }
-          .console .val   { color: #fff8e7; }
+          .console .label { color: #ff8c1a; }
+          .console .ok    { color: #c084fc; font-weight: bold; }
+          .console .val   { color: #ffe9c7; }
           .cursor-blink {
-            animation: starPulse 1s step-end infinite;
-            color: #66d9a8;
+            animation: pumpkinPulse 1s step-end infinite;
+            color: #f2a65a;
           }
         </style>
     </head>
     <body>
-
-      <!-- Snowflakes -->
+    
+      <!-- Falling autumn leaves -->
       <script>
-        for(let i=0;i<50;i++){
+        const leafColors = ['#e8590c','#d9480f','#f08c00','#fab005','#c92a2a','#9c36b5','#b45309'];
+        for(let i=0;i<42;i++){
           const s=document.createElement('div');
-          s.className='snowflake';
-          const size=2+Math.random()*3;
-          s.style.cssText=`width:${size}px;height:${size}px;top:-10px;left:${Math.random()*100}%;animation-delay:${Math.random()*8}s;animation-duration:${4+Math.random()*6}s;opacity:${0.3+Math.random()*0.5}`;
+          s.className='leaf';
+          const size=8+Math.random()*8;
+          s.style.cssText=`width:${size}px;height:${size*1.4}px;background:${leafColors[Math.floor(Math.random()*leafColors.length)]};top:-20px;left:${Math.random()*100}%;animation-delay:${Math.random()*8}s;animation-duration:${5+Math.random()*7}s;opacity:${0.4+Math.random()*0.5}`;
           document.body.appendChild(s);
         }
       </script>
-
-      <div class="tree-wrap">
-        <svg xmlns="http://www.w3.org/2000/svg" width="280" height="460" viewBox="0 0 220 380">
-          <defs>
-            <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#ffd700" stop-opacity="1"/>
-              <stop offset="100%" stop-color="#ffd700" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-
-          <!-- Ground snow mound -->
-          <ellipse cx="110" cy="358" rx="70" ry="14" fill="rgba(255,255,255,0.15)"/>
-
-          <!-- Wooden stand -->
-          <path d="M88 330 L92 350 L128 350 L132 330Z" fill="#6B3410"/>
-          <rect x="85" y="348" width="50" height="6" rx="2" fill="#8B4513"/>
-
-          <!-- Trunk -->
-          <rect x="98" y="300" width="24" height="32" rx="3" fill="#8B4513"/>
-          <rect x="100" y="302" width="4" height="28" rx="2" fill="rgba(255,255,255,0.06)"/>
-
-          <!-- Bottom tier foliage -->
-          <path d="M110 140 L50 290 L170 290Z" fill="#0d5e35"/>
-          <path d="M110 140 L80 290 L110 290Z" fill="rgba(255,255,255,0.06)"/>
-
-          <!-- Middle tier foliage -->
-          <path d="M110 95 L62 230 L158 230Z" fill="#147a4a"/>
-          <path d="M110 95 L86 230 L110 230Z" fill="rgba(255,255,255,0.06)"/>
-
-          <!-- Top tier foliage -->
-          <path d="M110 40 L75 175 L145 175Z" fill="#1a5c3a"/>
-          <path d="M110 40 L92 175 L110 175Z" fill="rgba(255,255,255,0.06)"/>
-
-          <!-- Gold garland dots (zigzag ~12 dots) -->
-          <circle class="garland-dot" cx="95" cy="170" r="2.5" fill="#ffd700" opacity="0.8"/>
-          <circle class="garland-dot" cx="125" cy="185" r="2.5" fill="#ffd700" opacity="0.8"/>
-          <circle class="garland-dot" cx="82" cy="205" r="2.5" fill="#ffd700" opacity="0.8"/>
-          <circle class="garland-dot" cx="140" cy="215" r="2.5" fill="#ffd700" opacity="0.8"/>
-          <circle class="garland-dot" cx="72" cy="235" r="2.5" fill="#ffd700" opacity="0.8"/>
-          <circle class="garland-dot" cx="148" cy="245" r="2.5" fill="#ffd700" opacity="0.8"/>
-          <circle class="garland-dot" cx="62" cy="265" r="2.5" fill="#ffd700" opacity="0.8"/>
-          <circle class="garland-dot" cx="155" cy="275" r="2.5" fill="#ffd700" opacity="0.8"/>
-          <circle class="garland-dot" cx="78" cy="285" r="2.5" fill="#ffd700" opacity="0.8"/>
-          <circle class="garland-dot" cx="135" cy="260" r="2.5" fill="#ffd700" opacity="0.8"/>
-          <circle class="garland-dot" cx="100" cy="195" r="2.5" fill="#ffd700" opacity="0.8"/>
-          <circle class="garland-dot" cx="120" cy="230" r="2.5" fill="#ffd700" opacity="0.8"/>
-
-          <!-- Red bauble ornaments (6) -->
-          <circle class="ornament o1" cx="90" cy="160" r="8" fill="#c41e3a"/>
-          <circle cx="88" cy="157" r="2" fill="rgba(255,255,255,0.5)"/>
-          <circle class="ornament o2" cx="135" cy="195" r="8" fill="#c41e3a"/>
-          <circle cx="133" cy="192" r="2" fill="rgba(255,255,255,0.5)"/>
-          <circle class="ornament o3" cx="72" cy="230" r="8" fill="#c41e3a"/>
-          <circle cx="70" cy="227" r="2" fill="rgba(255,255,255,0.5)"/>
-          <circle class="ornament o4" cx="148" cy="260" r="8" fill="#c41e3a"/>
-          <circle cx="146" cy="257" r="2" fill="rgba(255,255,255,0.5)"/>
-          <circle class="ornament o5" cx="85" cy="275" r="8" fill="#c41e3a"/>
-          <circle cx="83" cy="272" r="2" fill="rgba(255,255,255,0.5)"/>
-          <circle class="ornament o1" cx="120" cy="285" r="8" fill="#c41e3a"/>
-          <circle cx="118" cy="282" r="2" fill="rgba(255,255,255,0.5)"/>
-
-          <!-- Gold bauble ornaments (5) -->
-          <circle class="ornament o2" cx="108" cy="130" r="8" fill="#ffd700"/>
-          <circle cx="106" cy="127" r="2" fill="rgba(255,255,255,0.5)"/>
-          <circle class="ornament o3" cx="78" cy="185" r="8" fill="#ffd700"/>
-          <circle cx="76" cy="182" r="2" fill="rgba(255,255,255,0.5)"/>
-          <circle class="ornament o4" cx="152" cy="230" r="8" fill="#ffd700"/>
-          <circle cx="150" cy="227" r="2" fill="rgba(255,255,255,0.5)"/>
-          <circle class="ornament o5" cx="98" cy="260" r="8" fill="#ffd700"/>
-          <circle cx="96" cy="257" r="2" fill="rgba(255,255,255,0.5)"/>
-          <circle class="ornament o1" cx="130" cy="240" r="8" fill="#ffd700"/>
-          <circle cx="128" cy="237" r="2" fill="rgba(255,255,255,0.5)"/>
-
-          <!-- Blue ornaments (4) -->
-          <circle class="ornament o3" cx="115" cy="165" r="8" fill="#4a90d9"/>
-          <circle cx="113" cy="162" r="2" fill="rgba(255,255,255,0.5)"/>
-          <circle class="ornament o4" cx="88" cy="245" r="8" fill="#4a90d9"/>
-          <circle cx="86" cy="242" r="2" fill="rgba(255,255,255,0.5)"/>
-          <circle class="ornament o1" cx="138" cy="275" r="8" fill="#4a90d9"/>
-          <circle cx="136" cy="272" r="2" fill="rgba(255,255,255,0.5)"/>
-          <circle class="ornament o2" cx="105" cy="280" r="8" fill="#4a90d9"/>
-          <circle cx="103" cy="277" r="2" fill="rgba(255,255,255,0.5)"/>
-
-          <!-- Golden star topper -->
-          <polygon class="star-topper"
-            points="110,8 113,22 127,22 116,30 120,44 110,36 100,44 104,30 93,22 107,22"
-            fill="#ffd700"/>
-          <circle cx="110" cy="26" r="18" fill="url(#starGlow)" opacity="0.5"/>
-        </svg>
-      </div>
-
+    
+      <svg xmlns="http://www.w3.org/2000/svg" width="320" height="460" viewBox="0 0 300 400" style="z-index:1;overflow:visible;">
+        <defs>
+          <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fff6c9" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#fff6c9" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="pumpkinHalo" cx="50%" cy="55%" r="50%">
+            <stop offset="0%" stop-color="#ff8c1a" stop-opacity="0.45"/>
+            <stop offset="100%" stop-color="#ff8c1a" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+    
+        <!-- Full moon -->
+        <circle class="moon-halo" cx="150" cy="100" r="88" fill="url(#moonGlow)"/>
+        <circle cx="150" cy="100" r="46" fill="#f3ecc2"/>
+        <circle cx="134" cy="86" r="8" fill="rgba(0,0,0,0.06)"/>
+        <circle cx="163" cy="112" r="5" fill="rgba(0,0,0,0.05)"/>
+        <circle cx="150" cy="122" r="3.5" fill="rgba(0,0,0,0.05)"/>
+    
+        <!-- Bats (outer g = static position, inner g = animated) -->
+        <g transform="translate(58,72) scale(0.8)">
+          <g class="bat b1" fill="#150a1f">
+            <path d="M0 0 C -10 -9 -24 -9 -34 3 C -25 1 -19 3 -12 8 C -7 4 -3 4 0 6 C 3 4 7 4 12 8 C 19 3 25 1 34 3 C 24 -9 10 -9 0 0 Z"/>
+            <ellipse cx="0" cy="3" rx="4" ry="6"/>
+            <path d="M-4 -3 L-2 -9 L0 -3 Z"/><path d="M4 -3 L6 -9 L2 -3 Z"/>
+          </g>
+        </g>
+        <g transform="translate(238,92) scale(1.05)">
+          <g class="bat b2" fill="#150a1f">
+            <path d="M0 0 C -10 -9 -24 -9 -34 3 C -25 1 -19 3 -12 8 C -7 4 -3 4 0 6 C 3 4 7 4 12 8 C 19 3 25 1 34 3 C 24 -9 10 -9 0 0 Z"/>
+            <ellipse cx="0" cy="3" rx="4" ry="6"/>
+            <path d="M-4 -3 L-2 -9 L0 -3 Z"/><path d="M4 -3 L6 -9 L2 -3 Z"/>
+          </g>
+        </g>
+        <g transform="translate(150,178) scale(0.65)">
+          <g class="bat b3" fill="#1c0d24">
+            <path d="M0 0 C -10 -9 -24 -9 -34 3 C -25 1 -19 3 -12 8 C -7 4 -3 4 0 6 C 3 4 7 4 12 8 C 19 3 25 1 34 3 C 24 -9 10 -9 0 0 Z"/>
+            <ellipse cx="0" cy="3" rx="4" ry="6"/>
+            <path d="M-4 -3 L-2 -9 L0 -3 Z"/><path d="M4 -3 L6 -9 L2 -3 Z"/>
+          </g>
+        </g>
+    
+        <!-- Spiderweb (top-left corner) -->
+        <g stroke="rgba(255,255,255,0.28)" fill="none" stroke-width="1">
+          <path d="M8 6 L96 6"/>
+          <path d="M8 6 L8 84"/>
+          <path d="M8 6 L60 48"/>
+          <path d="M8 6 L44 74"/>
+          <path d="M8 6 L18 66"/>
+          <path d="M28 6 A 20 20 0 0 1 8 26"/>
+          <path d="M48 6 A 40 40 0 0 1 8 46"/>
+          <path d="M68 6 A 60 60 0 0 1 8 66"/>
+        </g>
+    
+        <!-- Spider hanging on a thread -->
+        <g class="spider">
+          <line x1="96" y1="6" x2="96" y2="40" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+          <g transform="translate(96,46)" fill="#0d0616">
+            <ellipse cx="0" cy="0" rx="5" ry="6.5"/>
+            <circle cx="0" cy="-8" r="3"/>
+            <path d="M-4 -2 L-11 -6 M-4 2 L-11 0 M-4 5 L-10 9 M4 -2 L11 -6 M4 2 L11 0 M4 5 L10 9" stroke="#0d0616" stroke-width="1.4" fill="none"/>
+          </g>
+        </g>
+    
+        <!-- Ghost (outer g = static position, inner g = animated) -->
+        <g transform="translate(196,238)">
+          <g class="ghost">
+            <path d="M22 0 C 4 0 -4 16 -4 34 L -4 62 C 0 57 4 62 8 62 C 12 62 16 57 20 62 C 24 62 28 57 32 62 C 36 62 40 57 44 62 L 44 34 C 44 16 40 0 22 0 Z" fill="rgba(240,240,255,0.85)"/>
+            <circle cx="12" cy="28" r="3.2" fill="#1a1030"/>
+            <circle cx="30" cy="28" r="3.2" fill="#1a1030"/>
+            <ellipse cx="21" cy="40" rx="3.4" ry="4.5" fill="#1a1030"/>
+          </g>
+        </g>
+    
+        <!-- Grass mound -->
+        <ellipse cx="150" cy="382" rx="132" ry="18" fill="rgba(20,10,32,0.55)"/>
+    
+        <!-- Pumpkin halo -->
+        <ellipse cx="135" cy="330" rx="118" ry="66" fill="url(#pumpkinHalo)"/>
+    
+        <!-- Jack-o'-lantern -->
+        <g>
+          <path d="M135 282 C 133 268 142 260 150 263 C 143 267 138 272 137 286 Z" fill="#3f5e2f"/>
+          <ellipse cx="135" cy="330" rx="70" ry="54" fill="#c2410c"/>
+          <ellipse cx="100" cy="332" rx="26" ry="49" fill="#e8590c"/>
+          <ellipse cx="170" cy="332" rx="26" ry="49" fill="#e8590c"/>
+          <ellipse cx="135" cy="330" rx="27" ry="54" fill="#f76707"/>
+          <!-- Carved, glowing face -->
+          <g class="pumpkin-face" fill="#ffcf3f">
+            <path d="M106 312 L130 305 L123 329 Z"/>
+            <path d="M164 312 L140 305 L147 329 Z"/>
+            <path d="M135 320 L145 334 L125 334 Z"/>
+            <path d="M104 344 L111 355 L119 347 L127 357 L135 347 L143 357 L151 347 L159 355 L166 344 L157 339 L113 339 Z"/>
+          </g>
+        </g>
+      </svg>
+    
       <h1 class="title">ARGOCD DEMO</h1>
-
+    
       <div class="console">
-        <div><span class="label">&gt; TREE STATUS:</span> <span class="ok">ALL ORNAMENTS IN PLACE</span></div>
-        <div><span class="label">&gt; ORNAMENTS SYNCED:</span>   <span class="val">5 / 5</span></div>
-        <div><span class="label">&gt; GARLAND:</span>            <span class="ok">illuminated</span> <span style="color:#ffd700">&#10024;</span></div>
-        <div><span class="label">&gt; LAST DECOR:</span>         <span class="val">just now</span> <span style="color:#66d9a8">&#127800;</span></div>
+        <div><span class="label">&gt; GHOST STATUS:</span> <span class="ok">ALL SPIRITS REPORTING</span></div>
+        <div><span class="label">&gt; BATS IN FLIGHT:</span> <span class="val">5 / 5</span></div>
+        <div><span class="label">&gt; HAUNT LEVEL:</span> <span class="ok">spooky</span> <span style="color:#ff8c1a">🎃</span></div>
+        <div><span class="label">&gt; LAST CURSE:</span> <span class="val">just now</span> <span style="color:#c084fc">🦇</span></div>
         <div><span class="label">&gt; </span><span class="cursor-blink">&#9608;</span></div>
       </div>
     </body>
