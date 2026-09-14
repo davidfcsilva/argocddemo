@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/davidfcsilva/claude.git
+    repoURL: https://github.com/davidfcsilva/argocddemo.git
     targetRevision: refs/heads/development
-    path: argocddemo/k8s
+    path: k8s
   destination:
     server: https://kubernetes.default.svc
     namespace: argocddemo
